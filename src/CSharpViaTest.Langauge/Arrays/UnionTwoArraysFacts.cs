@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -16,18 +17,20 @@ namespace CSharpViaTest.Langauge.Arrays
 
             #endregion
 
-            var unionLength = left.Length + right.Length;
+            var unionSet = new HashSet<T>();
+            foreach (var t in left)
+            {
+                unionSet.Add(t);
+            }
+
+            foreach (var t in right)
+            {
+                unionSet.Add(t);
+            }
+
+            var unionLength = unionSet.Count;
             var unionArray = new T[unionLength];
-            for (var i = 0; i < left.Length; i++)
-            {
-                unionArray[i] = left[i];
-            }
-
-            for (var i = 0; i < right.Length; i++)
-            {
-                unionArray[left.Length + i] = right[i];
-            }
-
+            unionSet.CopyTo(unionArray);
             return unionArray;
         }
 
