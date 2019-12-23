@@ -17,6 +17,9 @@ namespace CSharpViaTest.Langauge.Arrays
 
             #endregion
 
+            if (left == null || right == null)
+                throw new ArgumentNullException(left == null ? nameof(left) : nameof(right));
+
             var unionSet = new HashSet<T>();
             foreach (var t in left)
             {
@@ -84,10 +87,14 @@ namespace CSharpViaTest.Langauge.Arrays
         [Fact]
         public void should_throw_if_null()
         {
-            int[] left = null;
             var right = new[] {1, 2};
+            Assert.Throws<ArgumentNullException>("left", () => UnionArray(null, right));
+        }
 
-            Assert.Throws<ArgumentNullException>(nameof(left), () => UnionArray(left, right));
+        [Fact]
+        public void should_throw_if_both_null()
+        {
+            Assert.Throws<ArgumentNullException>("left", () => UnionArray<int>(null, null));
         }
     }
 }
