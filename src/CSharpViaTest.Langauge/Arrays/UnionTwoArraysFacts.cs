@@ -14,9 +14,21 @@ namespace CSharpViaTest.Langauge.Arrays
             // your own implementation.
             // Note: A List<T> can be used to dynamically add/remove items.
 
-            throw new NotImplementedException();
-
             #endregion
+
+            var unionLength = left.Length + right.Length;
+            var unionArray = new T[unionLength];
+            for (var i = 0; i < left.Length; i++)
+            {
+                unionArray[i] = left[i];
+            }
+
+            for (var i = 0; i < right.Length; i++)
+            {
+                unionArray[left.Length + i] = right[i];
+            }
+
+            return unionArray;
         }
 
         [Fact]
@@ -62,7 +74,7 @@ namespace CSharpViaTest.Langauge.Arrays
             var right = Array.Empty<int>();
 
             int[] union = UnionArray(left, right);
-            
+
             Assert.Empty(union);
         }
 
